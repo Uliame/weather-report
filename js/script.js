@@ -1,19 +1,23 @@
-async function buscarClima() {
+async function buscarClima() 
+{
     const apiKey = "CHAVE_DA_API"; 
     const cidade = document.getElementById("cidade").value;
     
-    if (cidade === "") {
+    if (cidade === "") 
+    {
         alert("Digite o nome de uma cidade!");
         return;
     }
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&appid=${apiKey}&units=metric&lang=pt_br`;
 
-    try {
+    try
+    {
         const resposta = await fetch(url);
         const dados = await resposta.json();
 
-        if (resposta.ok) {
+        if (resposta.ok) 
+        {
             document.getElementById("resultado").innerHTML = `
                 <h2>${dados.name}, ${dados.sys.country}</h2>
                 <p>Temperatura: ${dados.main.temp}°C</p>
@@ -21,7 +25,8 @@ async function buscarClima() {
                 <p>Umidade: ${dados.main.humidity}%</p>
                 <p>Vento: ${dados.wind.speed} m/s</p>
             `;
-        } else {
+        } else 
+        {
             document.getElementById("resultado").innerHTML = `<p>Cidade não encontrada.</p>`;
         }
     } catch (error) {
@@ -29,3 +34,6 @@ async function buscarClima() {
         console.error(error);
     }
 }
+
+
+
