@@ -27,6 +27,10 @@ Planejo no futuro fazer projetos maiores e mais ambiciosos com a linguagem, pois
 - Melhorar a interface do usuário
 - Requests de API mais complexas
 
+## Atualizações
+
+1. Algumas cidades já são mostradas logo quando o site é carregado, inclusive uma cidade aleatória.
+
 <br>
 
 ### Manual
