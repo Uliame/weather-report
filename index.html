@@ -12,13 +12,21 @@
 
     <div class="container">
         <h1>Weather Report</h1>
-        <input type="text" id="cidade" placeholder="Digite o nome da cidade">
-        <button onclick="buscarClima()">Buscar</button>
+        <input type="text" id="cidade-input" placeholder="Digite o nome da cidade">
+        <button onclick="buscarClimaB()">Buscar</button>
         <div id="resultado"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
     
 </body>
+
+<div id="clima-container">
+    <div class="clima-card" id="sp"></div>
+    <div class="clima-card" id="rioclaro"></div>
+    <div class="clima-card" id="ny"></div>
+    <div class="clima-card" id="tokyo"></div>
+    <div class="clima-card" id="aleatoria"></div>
+</div>
 
 </html>
