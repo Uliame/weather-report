@@ -30,7 +30,7 @@ Planejo no futuro fazer projetos maiores e mais ambiciosos com a linguagem, pois
 ## Atualizações
 
 1. Algumas cidades já são mostradas logo quando o site é carregado, inclusive uma cidade aleatória.
-2. As cidades são mostradas em um grid 4x3, em vez de listras que ocupavam a tela toda; Os cards mudam de cor dependendo da temperatura; Quando se pesquisa uma cidade, ela vira um card no grid, em vez de ser mostrada no container de pesquisa; Aumento da lista de cidades alatórias e agora são mostradas duas cidades aleatórias.
+2. As cidades são mostradas em um grid 4x3, em vez de listras que ocupavam a tela toda; Os cards mudam de cor dependendo da temperatura; Quando se pesquisa uma cidade, ela vira um card no grid, em vez de ser mostrada no container de pesquisa; Aumento da lista de cidades alatórias e agora são mostradas duas cidades aleatórias; A pesquisa funciona ao apertar *enter*, visto que antes só funcionava ao clicar no botão de busca.
 
 <br>
 
