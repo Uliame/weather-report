@@ -1,27 +1,27 @@
-const apiKey = "API_KEY";
+const apiKey = "ff729c7e7bd5336012159cdf6ae532a2";
 
 const cidadesFixas = [
-    {nome: "São Paulo", id: "sp"},
-    {nome: "Rio Claro", id: "rc"},
-    {nome: "Rio de Janeiro", id: "rj"},
-    {nome: "Brasília", id: "brasilia"},
-    {nome: "New York", id: "ny"},
-    {nome: "Tokyo", id: "tokyo"},
-    {nome: "Pequim", id: "pequim"},	
-    {nome: "Londres", id: "london"},
+    { nome: "São Paulo", id: "sp" },
+    { nome: "Rio Claro", id: "rc" },
+    { nome: "Rio de Janeiro", id: "rj" },
+    { nome: "Brasília", id: "brasilia" },
+    { nome: "New York", id: "ny" },
+    { nome: "Tokyo", id: "tokyo" },
+    { nome: "Pequim", id: "pequim" },    
+    { nome: "Londres", id: "london" },
 ];
 
-const cidadesAleatorias = ["Buenos Aires", "Berlim", "Caracas", "Toronto", "Dubai", "Moscow", "Paris", "Roma", "Madrid", "San Juan", "Bogotá", "Havana", "Lima", "Santiago", "Sydney", "Fortaleza", "Salvador", "Belo Horizonte", "Curitiba", "Luanda", "Cairo", "Quito"];
+const cidadesAleatorias = ["Quaraí", "Kyoto", "Seoul", "Buenos Aires", "Berlim", "Caracas", "Toronto", "Dubai", "Moscow", "Paris", "Roma", "Madrid", "San Juan", "Bogotá", "Havana", "Lima", "Santiago", "Sydney", "Fortaleza", "Salvador", "Belo Horizonte", "Curitiba", "Luanda", "Cairo", "Quito", "Dallol", "Ghadamés", "Natal", "Manaus", "Belém", "Macapá", "São Luís", "Teresina", "João Pessoa", "Maceió", "Aracaju", "Vitória", "Florianópolis", "Porto Alegre", "Campo Grande", "Cuiabá", "Goiânia", "Palmas"];
 
 const cidadesEscolhidas = cidadesAleatorias
-    .sort(() => Math.random() - 0.5) 
-    .slice(0, 2) 
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 2);
 
 const cidadesExtras = cidadesEscolhidas.map((cidade, index) => ({
-        nome: cidade,
-        id: `aleatoria-${index}`
+    nome: cidade,
+    id: `aleatoria-${index}`
 }));
-    
+
 const todasCidades = [...cidadesFixas, ...cidadesExtras];
 
 document.getElementById("cidade-input").addEventListener("keypress", function (event) {
@@ -46,70 +46,111 @@ function buscarClima(cidadeObj) {
 }
 
 function buscarClimaB() {
-    const cidadeInput = document.getElementById("cidade-input").value.trim();
-    
-    if (cidadeInput !== "") {
-        const cidadeObj = { nome: cidadeInput, id: "pesquisada" };
+    const cidadeInput = document.getElementById("cidade-input");
+    const cidadeNome = cidadeInput.value.trim();
 
+    if (cidadeNome !== "") {
+        const cidadeObj = { nome: cidadeNome, id: `pesquisada-${Date.now()}` };
 
-        const container = document.getElementById("clima-container");
-        let primeiraCidade = document.getElementById("pesquisada");
-
-        if (!primeiraCidade) {
-            primeiraCidade = document.createElement("div");
-            primeiraCidade.id = "pesquisada";
-            primeiraCidade.classList.add("clima-card");
-            container.prepend(primeiraCidade);
-        }
-
+        adicionarCidadeNoGrid(cidadeObj, true); 
         buscarClima(cidadeObj);
+
+        cidadeInput.value = ""; 
     } else {
         alert("Por favor, digite o nome de uma cidade.");
     }
 }
 
-function adicionarCidadeNoGrid(cidadeObj) {
+function obterLocalizacao() {
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                buscarClimaPorCoordenadas(lat, lon, "localizacao");
+            },
+            (error) => {
+                console.error("Erro ao obter localização:", error);
+            }
+        );
+    } else {
+        console.error("Geolocalização não suportada pelo navegador.");
+    }
+}
+
+function buscarClimaPorCoordenadas(lat, lon, id) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=pt_br`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(dados => {
+            if (dados.cod === 200) {
+                exibirClima(dados, id);
+            } else {
+                console.error("Erro ao buscar clima por coordenadas:", dados.message);
+            }
+        })
+        .catch(error => console.error("Erro na requisição:", error));
+}
+
+function adicionarCidadeNoGrid(cidadeObj, isPesquisa = false) {
     const grid = document.getElementById("clima-container");
-    
     const novoCard = document.createElement("div");
     novoCard.className = "clima-card";
     novoCard.id = cidadeObj.id;
     novoCard.innerHTML = `<h2>${cidadeObj.nome}</h2><p>Carregando...</p>`;
 
-    grid.appendChild(novoCard); 
+    if (isPesquisa) {
+        grid.insertBefore(novoCard, grid.children[1]); 
+    } else {
+        grid.appendChild(novoCard);
+    }
 }
 
 function exibirClima(dados, id) {
     const card = document.getElementById(id);
     if (card) {
         const temperatura = dados.main.temp;
+        const iconeCodigo = dados.weather[0].icon;
+        const iconeURL = `https://openweathermap.org/img/wn/${iconeCodigo}@2x.png`;
 
         let classeTemperatura = "";
         if (temperatura < 10 && temperatura >= 0) {
-            classeTemperatura = "frio"; 
+            classeTemperatura = "frio";
         } else if (temperatura < 0) {
             classeTemperatura = "abaixo-zero";
-        }
-        else if (temperatura >= 10 && temperatura < 25) {
+        } else if (temperatura >= 10 && temperatura < 25) {
             classeTemperatura = "medio";
-        } else {
+        } else if (temperatura >= 25 && temperatura < 40) {
             classeTemperatura = "quente";
+        } else if (temperatura >= 40) {
+            classeTemperatura = "muito-quente";
         }
 
-       
         card.className = `clima-card ${classeTemperatura}`;
 
         card.innerHTML = `
             <h2>${dados.name}</h2>
-            <p>${dados.weather[0].description}</p>
-            <p>🌡 ${temperatura}°C</p>
+            <p>
+                <img src="${iconeURL}" alt="${dados.weather[0].description}" style="width: 30px; height: auto; vertical-align: middle;">
+                ${dados.weather[0].description}
+            </p>
+            <p>${temperatura}°C</p>
         `;
     }
 }
 
 window.onload = () => {
     const climaContainer = document.getElementById("clima-container");
-    climaContainer.innerHTML = ""; 
+    climaContainer.innerHTML = "";
+
+    const localizacaoCard = document.createElement("div");
+    localizacaoCard.className = "clima-card";
+    localizacaoCard.id = "localizacao";
+    localizacaoCard.innerHTML = `<h2>Localização Atual</h2><p>Carregando...</p>`;
+    climaContainer.appendChild(localizacaoCard);
+
+    obterLocalizacao();
 
     cidadesFixas.forEach((cidade) => {
         adicionarCidadeNoGrid(cidade);
@@ -121,4 +162,3 @@ window.onload = () => {
         buscarClima(cidade);
     });
 };
-
