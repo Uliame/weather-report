@@ -29,13 +29,23 @@ Planejo no futuro fazer projetos maiores e mais ambiciosos com a linguagem, pois
 
 ## Atualizações
 
-1. Algumas cidades já são mostradas logo quando o site é carregado, inclusive uma cidade aleatória.
-2. As cidades são mostradas em um grid de 4 colunas, em vez de listras que ocupavam a tela toda; Os cards mudam de cor dependendo da temperatura; Quando se pesquisa uma cidade, ela vira um card no grid, em vez de ser mostrada no container de pesquisa; Aumento da lista de cidades alatórias e agora são mostradas duas cidades aleatórias; A pesquisa funciona ao apertar *enter*, visto que antes só funcionava ao clicar no botão de busca.
-3. Ao buscar uma cidade, a barra de pesquisa é limpa para uma nova busca; Resolvido o problema que as cidades pesquisadas tinham o card substituído, agora elas são adicionadas ao grid até a página ser recarregada;
-4. Foram adicionados ícones que simbolizam a situação do clima *chovendo*, *nublado*, etc; O primeiro card do grid agora mostra a cidade da localização atual do usuário; Nova classificação de cor "muito-quente" para cidades acima de 40°.
+1. Atualização
+   - Algumas cidades já são mostradas logo quando o site é carregado, inclusive uma cidade aleatória.
+2. Atualizações
+   - As cidades são mostradas em um grid de 4 colunas, em vez de listras que ocupavam a tela toda; Os cards mudam de cor dependendo da temperatura.
+   - Quando se pesquisa uma cidade, ela vira um card no grid, em vez de ser mostrada no container de pesquisa.
+   - Aumento da lista de cidades alatórias e agora são mostradas duas cidades aleatórias.
+   - A pesquisa funciona ao apertar *enter*, visto que antes só funcionava ao clicar no botão de busca.
+3. Atualizações
+   - Ao buscar uma cidade, a barra de pesquisa é limpa para uma nova busca
+   - Resolvido o problema que as cidades pesquisadas tinham o card substituído, agora elas são adicionadas ao grid até a página ser recarregada
+4. Atualizações Finais
+   - Foram adicionados ícones que simbolizam a situação do clima *chovendo*, *nublado*, etc
+   - O primeiro card do grid agora mostra a cidade da localização atual do usuário
+   - Nova classificação de cor "muito-quente" para cidades acima de 40°.
 
 <br>
 
 ### Manual
 
-1. Apenas digitar o nome da cidade na caixa de busca.
+1. Apenas digitar o nome de uma cidade na caixa de busca.
