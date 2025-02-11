@@ -1,4 +1,4 @@
-const apiKey = "ff729c7e7bd5336012159cdf6ae532a2";
+const apiKey = "API_KEY";
 
 const cidadesFixas = [
     { nome: "São Paulo", id: "sp" },
