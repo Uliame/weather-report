@@ -27,6 +27,8 @@ Planejo no futuro fazer projetos maiores e mais ambiciosos com a linguagem, pois
 - Melhorar a interface do usuário
 - Requests de API mais complexas
 
+<br>
+
 ## Atualizações
 
 1. Atualização
@@ -44,9 +46,3 @@ Planejo no futuro fazer projetos maiores e mais ambiciosos com a linguagem, pois
    - Foram adicionados ícones que simbolizam a situação do clima *chovendo*, *nublado*, etc
    - O primeiro card do grid agora mostra a cidade da localização atual do usuário
    - Nova classificação de cor "muito-quente" para cidades acima de 40°.
-
-<br>
-
-### Manual
-
-1. Apenas digitar o nome de uma cidade na caixa de busca.
